@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:-webkit-user-select="http://www.w3.org/1999/xhtml" xmlns:word-wrap="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/simple.css">
+    <script type="text/javascript" src="../laydate/laydate.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jHsDate.js"></script>
+    <link rel="stylesheet" href="../css/jHsDate.css" />
+    <title>Document</title>
+</head>
+
+<body>
+<div class="border-all">
+
+
+    <form>
+        <div class="border-contain" id="d1">
+            <input class="input font-size" type="text" placeholder="请填写公司名称" name="projectName" id="companyName" required="required">
+        </div>
+       <p><input type="checkbox" name="vehicle" value="0" checked="checked"/>不希望企业看到我</p>
+        <label id="u1"></label>
+        <div class="border-contain" id="d2">
+            <input class="input font-size" type="text" placeholder="请填写所属部门" name="department" id="department">
+        </div>
+        <label id="u2"></label>
+        <div class="border-contain" id="d3">
+            <input class="input font-size" type="text" placeholder="例如：java工程师" name="position" id="position">
+        </div>
+        <label id="u3"></label>
+        <div class="border-containleft" id="d4">
+            <input class="input font-size" type="text'" placeholder="入职时间" id="startTime">
+<!--            <input id="time" type="text"> -->
+            <script>
+                //执行一个laydat例
+                laydate.render({
+                    elem: '#starttime',
+                    type: 'month'//指定元素
+                });
+            </script>
+        </div>
+        <label id="u4"></label>
+        <div class="border-containright" id="d5">
+            <input class="input font-size" type="text" placeholder="离职时间" id="finalTime">
+            <script>
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#finalTime',
+                    type: 'month'//指定元素
+                });
+            </script>
+        </div>
+        <label id="date" class="u5"></label>
+        <div class="border-bottom" id="d6">
+            <!--            <input class="input-bottom font-size" type="text" id="ta"  onkeypress="newline()" placeholder="请填写项目名称" name="projectName">-->
+            <textarea class="input-bottom font-size" placeholder="" name="projectName"></textarea>
+        </div>
+
+        <div class="border-save">
+            <input type="submit" value="保存" class="mr_save">
+        </div>
+    </form>
+
+    <ul>
+        <li id="li1"> 工作经历</li>
+        <li id="li2"> 公司名称</li>
+        <li id="li3"> 部门</li>
+        <li id="li4"> 职位名称</li>
+        <li id="li5"> 在职时间</li>
+        <li id="li6"> 工作内容</li>
+    </ul>
+    <!--<script>-->
+    <!--    $("form :input").each(function () {-->
+    <!--    //通过jquery api：$("HTML字符串") 创建jquery对象-->
+    <!--    var $input = $("<strong class='high'>*</strong>");-->
+    <!--    //添加到this对象的父级对象下-->
+    <!--    $(this).parent().append($input);-->
+    <!--    });-->
+
+    <!--    //为表单元素添加失去焦点事件-->
+    <!--    $("form :input").blur(function(){-->
+    <!--        var $parent = $(this).parent();-->
+    <!--        //验证姓名-->
+    <!--        if($(this).is("#companyName")){-->
+    <!--           // var nameVal = $.trim(this.value); //原生js去空格方式：this.replace(/(^\s*)|(\s*$)/g, "")-->
+    <!--           // var regName = /[~#^$@%&!*()<>:;'"{}【】  ]/;-->
+    <!--            if($("#companyName").val()|| ""){-->
+    <!--                var okMsg=" 输入正确";-->
+    <!--                $parent.find(".high").remove();-->
+    <!--                $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");-->
+    <!--                return false;-->
+    <!--            }-->
+    <!--            else{-->
+    <!--                var errorMsg = " 姓名非空，长度6位以上，不包含特殊字符！";-->
+    <!--                //class='msg onError' 中间的空格是层叠样式的格式-->
+    <!--                $parent.append("<span class='msg onError'>" + errorMsg + "</span>");-->
+    <!--                return false;-->
+    <!--            }-->
+    <!--        }-->
+    <!--        //验证邮箱-->
+    <!--        if($(this).is("#email")){-->
+    <!--            var emailVal = $.trim(this.value);-->
+    <!--            var regEmail = /.+@.+\.[a-zA-Z]{2,4}$/;-->
+    <!--            if(emailVal== "" || (emailVal != "" && !regEmail.test(emailVal))){-->
+    <!--                var errorMsg = " 请输入正确的E-Mail住址！";-->
+    <!--                $parent.append("<span class='msg onError'>" + errorMsg + "</span>");-->
+    <!--            }-->
+    <!--            else{-->
+    <!--                var okMsg=" 输入正确";-->
+    <!--                $parent.find(".high").remove();-->
+    <!--                $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");-->
+    <!--            }-->
+    <!--        }-->
+    <!--    });-->
+    <!--</script>-->
+    <script>
+        $("#companyName").blur(function () {
+            var name = $(this).val();
+            var len = name.length;
+            $("#u1").empty();
+            if ($.trim(name) == '') //判断用户名不为空
+            {
+                $("#u1").append("<span style='color:red;'>♠不能为空</span>");
+                return false;
+            }
+            // } else if (len < 4 || len > 15)//用户名在4-15位之间
+            // {
+            //     $("#u1").append("<span style='color:red;'>♠用户名在4-15位之间</span>");
+            //     return false;
+            else {
+                //$("#u1").append("<span style='color:green; font-size:28px;'>☺</span>");
+                return true;
+            }
+        });
+
+        $("#department").blur(function () {
+            var name = $(this).val();
+            var len = name.length;
+            $("#u2").empty();
+            if ($.trim(name) == '') //判断用户名不为空
+            {
+                $("#u2").append("<span style='color:red;'>♠不能为空</span>");
+                return false;
+            } else {
+                return true;
+            }
+        });
+
+        $("#position").blur(function () {
+            var name = $(this).val();
+            var len = name.length;
+            $("#u3").empty();
+            if ($.trim(name) == '') //判断用户名不为空
+            {
+                $("#u3").append("<span style='color:red;'>♠不能为空</span>");
+                return false;
+            } else {
+                return true;
+            }
+        });
+
+        $("#startTime").blur(function () {
+            var name = $(this).val();
+            var len = name.length;
+            $("#u4").empty();
+            if ($.trim(name) == '') //判断用户名不为空
+            {
+                $("#u4").append("<span style='color:red;'>♠不能为空</span>");
+                return false;
+            } else {
+                return true;
+            }
+        });
+
+        $("#finalTime").blur(function () {
+            var name = $(this).val();
+            var len = name.length;
+            $(".u5").empty();
+            if ($.trim(name) == '') //判断用户名不为空
+            {
+                $(".u5").append("<span style='color:red;'>♠不能为空</span>");
+                return false;
+            } else {
+                return true;
+            }
+        });
+    </script>
+<input type="text" id="datemaxmin">
+    <script>
+        // $('#date9').jHsDate();
+        // $('#time').jHsDate({
+        //     format: 'hh:mm'
+        // });
+        // $('#datetimeformat').jHsDate({
+        //     format: 'yyyy年MM月dd日 hh时mm分'
+        // });
+        // $('#datetimedef').jHsDate({
+        //     defDate: '2017-01-01',
+        //     defIsShow: true
+        // });
+        // $('#dateread').jHsDate({
+        //     inputIsRead: true
+        // });
+        $('#datemaxmin').jHsDate({
+            minDate: '2010-01-01',
+            maxDate: '2017-05-31'
+        });
+        // $('#datecallback').jHsDate({
+        //     callBack: function () {
+        //         alert('我是回掉函数')
+        //     }
+        // });
+    </script>
+</div>
+
+</body>
+</html>

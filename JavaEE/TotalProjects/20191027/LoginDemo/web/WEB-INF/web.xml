@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
+           version="4.0">
+<welcome-file-list>
+    <welcome-file>/jsp/user/login.jsp</welcome-file>
+</welcome-file-list>
+
+        <!--  权限拦截器 -->
+<filter>
+<filter-name>authFilter</filter-name>
+<filter-class>com.banyuan.pangu.util.filter.AuthFilter</filter-class>
+<init-param>
+    <param-name>Message</param-name>
+    <param-value>你好</param-value>
+</init-param>
+</filter>
+
+
+<filter-mapping>
+<filter-name>authFilter</filter-name>
+<url-pattern>*.do</url-pattern>
+</filter-mapping>
+
+        <!--    登陆权限拦截器-->
+<filter>
+<filter-name>loginFilter</filter-name>
+<filter-class>com.banyuan.pangu.util.filter.LoginFilter</filter-class>
+</filter>
+
+<filter-mapping>
+<filter-name>loginFilter</filter-name>
+<url-pattern>*.jsp</url-pattern>
+</filter-mapping>
+
+        <!--    平台拦截器-->
+<filter>
+<filter-name>platformFilter</filter-name>
+<filter-class>com.banyuan.pangu.util.filter.PlatformFilter</filter-class>
+</filter>
+
+<filter-mapping>
+<filter-name>platformFilter</filter-name>
+<url-pattern>*.do</url-pattern>
+</filter-mapping>
+</web-app>
+

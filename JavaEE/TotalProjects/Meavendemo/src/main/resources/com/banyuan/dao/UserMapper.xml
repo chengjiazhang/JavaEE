@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace指的是你的dao接口-->
+<mapper namespace="com.banyuan.dao.UserDao">
+    <!--配置查询所有  其中id不能乱写必须是dao接口中的方法名
+    parameterType:定义参数类型
+    resultType：返回值类型，写的是实体类的全路径
+    如果方法返回值是 list,在 resultType 中写 List 的泛型, 因为 mybatis 对 jdbc 封装,一行一行读取数据
+    -->
+    <select id="findAll" resultType="com.banyuan.entity.User">
+        select * from login_info where id=#{id};
+    </select>
+</mapper>
